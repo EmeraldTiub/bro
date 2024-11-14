@@ -3,12 +3,18 @@ name: Create Issue with Movie Options
 on:
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
   create_issue:
     runs-on: ubuntu-latest
     steps:
-      - name: Create a GitHub Issue
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Create GitHub Issue
         uses: peter-evans/create-issue-from-file@v3
         with:
           title: "{Movie here} or {Movie here}?"
-          content-filepath: issue_content.md
+          content-filepath: .github/ISSUE_TEMPLATE/movie_issue_content.md
